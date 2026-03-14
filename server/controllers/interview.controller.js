@@ -293,14 +293,22 @@ Answer: ${answer}
       },
     ];
 
-    const aiResponse = await askAi(aiResponse);
-    const parsed = JSON.parse(aiResponse);
+    const aiResponse = await askAi(messages);
+    // const parsed = JSON.parse(aiResponse);
+
+    let parsed;
+
+    try {
+      parsed = JSON.parse(aiResponse);
+    } catch {
+      throw new Error("AI returned invalid JSON");
+    }
 
     question.answer = answer;
     question.confidence = parsed.confidence;
     question.communication = parsed.communication;
     question.correctness = parsed.correctness;
-    question.score = parsed.score;
+    question.score = parsed.finalScore;
     question.feedback = parsed.feedback;
 
     await interview.save();
@@ -317,16 +325,23 @@ Answer: ${answer}
 
 export const finishInterview = async (req, res) => {
   try {
+    console.log("Body: ", req.body);
     const { interviewId } = req.body;
-    const interview = await Interview.findBVyId(interviewId);
+    if (!interviewId) {
+      return res.status(400).json({
+        message: "Interview ID missing",
+      });
+    }
+
+    const interview = await Interview.findById(interviewId);
 
     if (!interview) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: "failed to find interview.",
       });
     }
 
-    const totalQuestions = interview.questions.length;
+    const totalQuestions = interview.questions?.length || 0;
 
     let totalScore = 0;
     let totalConfidence = 0;
@@ -353,7 +368,7 @@ export const finishInterview = async (req, res) => {
       : 0;
 
     interview.finalScore = finalScore;
-    interview.status = "completed";
+    interview.status = "Completed";
 
     await interview.save();
 
