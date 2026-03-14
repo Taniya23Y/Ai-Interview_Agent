@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Home from "./pages/home";
 import Auth from "./pages/Auth";
+import InterviewPage from "./pages/InterviewPage.jsx";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -30,6 +31,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />}></Route>
       <Route path="/auth" element={<Auth />}></Route>
+      <Route path="/interview" element={<InterviewPage />}></Route>
     </Routes>
   );
 };
