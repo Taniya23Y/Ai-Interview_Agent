@@ -120,16 +120,16 @@ const Home = () => {
                 icon: <BsClock size={24} />,
                 step: "STEP 3",
                 title: "Timer Based Simulation",
-                desc: "Real interview pressure with time tracking.",
+                desc: "Real time interview pressure with time tracking.",
               },
             ].map((item, index) => (
               <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 + index * 0.2 }}
+                transition={{ duration: 0.2 + index * 0.2 }}
                 whileHover={{ rotate: 0, scale: 1.06 }}
                 key={index}
-                className={`relative bg-white rounded-3xl border-2 border-green-100 hover:border-green-500 w-80 max-w-[90%] shadow-md hover:shadow-2xl transition-all duration-300 ${index === 0 ? "rotate-[-40deg]" : ""} ${index === 1 ? "rotate-3 md:-mt-6 shadow-xl" : ""} ${index === 2 ? "-rotate-3" : ""}`}
+                className={`relative bg-white rounded-3xl border-2 border-green-100 hover:border-green-500 w-80 max-w-[90%] shadow-md hover:shadow-2xl transition-all duration-300 ${index === 0 ? "rotate-[-5deg] p-6" : ""} ${index === 1 ? "rotate-3 md:-mt-6 shadow-xl p-6" : ""} ${index === 2 ? "-rotate-3 p-6" : ""}`}
               >
                 <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-white border-2 border-green-500 text-green-600 w-16 hg-16 rounded-2xl flex items-center justify-center shadow-lg">
                   {item.icon}
