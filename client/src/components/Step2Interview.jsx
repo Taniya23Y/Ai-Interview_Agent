@@ -308,8 +308,8 @@ const Step2Interview = ({ interviewData, onFinish }) => {
         },
       );
 
-      console.log("Finishing interview:", interviewId);
-      console.log(result.data);
+      // console.log("Finishing interview:", interviewId);
+      // console.log(result.data);
       onFinish(result.data);
     } catch (error) {
       console.log(error);

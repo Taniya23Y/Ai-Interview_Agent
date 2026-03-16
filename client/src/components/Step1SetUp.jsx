@@ -41,7 +41,7 @@ const Step1SetUp = ({ onStart }) => {
         { withCredentials: true },
       );
 
-      console.log(result.data);
+      // console.log(result.data);
 
       setRole(result.data.role || "");
       setExperience(result.data.experience || "");
@@ -66,7 +66,7 @@ const Step1SetUp = ({ onStart }) => {
         { withCredentials: true },
       );
 
-      console.log(result.data);
+      // console.log(result.data);
 
       if (userData) {
         dispatch(

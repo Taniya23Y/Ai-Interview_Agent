@@ -6,6 +6,7 @@ import cors from "cors";
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
 import InterviewRouter from "./routes/interview.route.js";
+import paymentRouter from "./routes/payment.route.js";
 dotenv.config();
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/interview", InterviewRouter);
+app.use("/api/payment", paymentRouter);
 
 const PORT = process.env.PORT || 6000;
 

@@ -16,7 +16,6 @@ const InterviewHistory = () => {
           ServerUrl + "/api/interview/get-interview",
           { withCredentials: true },
         );
-        console.log("API Response:", result.data);
         setInterviews(result.data);
       } catch (error) {
         console.log(error);
