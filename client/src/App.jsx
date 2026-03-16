@@ -10,7 +10,7 @@ import Pricing from "./pages/Pricing.jsx";
 import InterviewReport from "./pages/InterviewReport.jsx";
 import InterviewHistory from "./pages/InterviewHistory.jsx";
 
-export const ServerUrl = "http://localhost:8000";
+export const ServerUrl = "https://ai-interview-agent-gm02.onrender.com";
 
 const App = () => {
   const dispatch = useDispatch();
