@@ -3,10 +3,12 @@ import dotenv from "dotenv";
 import connectDB from "./config/connectDB.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+
 import authRouter from "./routes/auth.route.js";
 import userRouter from "./routes/user.route.js";
 import InterviewRouter from "./routes/interview.route.js";
 import paymentRouter from "./routes/payment.route.js";
+
 dotenv.config();
 
 const app = express();
@@ -19,15 +21,19 @@ const allowedOrigins = [
   "https://ai-interview-agent-woad.vercel.app",
 ];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
 
-// handle preflight requests
-app.options("*", cors());
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
@@ -37,7 +43,7 @@ app.use("/api/payment", paymentRouter);
 const PORT = process.env.PORT || 6000;
 
 app.get("/", (req, res) => {
-  return res.json({ message: "Server started at port 8000" });
+  res.json({ message: "Server running successfully" });
 });
 
 app.listen(PORT, () => {
