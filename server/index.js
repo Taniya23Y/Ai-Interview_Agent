@@ -14,12 +14,20 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://ai-interview-agent-woad.vercel.app",
+];
+
 app.use(
   cors({
-    origin: "https://ai-interview-agent-woad.vercel.app",
+    origin: allowedOrigins,
     credentials: true,
-  }),
+  })
 );
+
+// handle preflight requests
+app.options("*", cors());
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
