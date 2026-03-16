@@ -14,7 +14,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import jsPDF from "jsPDF";
+import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 const Step3Report = ({ report }) => {
