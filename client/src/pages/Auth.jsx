@@ -54,12 +54,14 @@ const Auth = ({ isModel = false }) => {
           <div className="bg-black text-white p-2 rounded-lg">
             <BsRobot size={20} />
           </div>
-          <h2 className="text-lg font-semibold">AI Interview Agent</h2>
+          <h2 className="text-lg text-amber-700 font-semibold">
+            AI Interview Agent
+          </h2>
         </div>
 
-        <h1 className="text-2xl md:text-3xl font-semibold text-center mb-4 leading-snug">
+        <h1 className="text-2xl md:text-3xl font-semibold text-black text-center mb-4 leading-snug">
           Continue with{" "}
-          <span className="bg-green-100 text-green-600 px-3 py-1 rounded-full inline-flex items-center gap-2">
+          <span className="bg-amber-400/10 text-amber-300 border border-amber-400/20 px-3 py-1 rounded-full inline-flex items-center gap-2">
             <IoSparkles size={16} />
             AI Smart Interview
           </span>

@@ -11,6 +11,7 @@ import InterviewReport from "./pages/InterviewReport.jsx";
 import InterviewHistory from "./pages/InterviewHistory.jsx";
 
 export const ServerUrl = "https://ai-interview-agent-gm02.onrender.com";
+// export const ServerUrl = "http://localhost:8000";
 
 const App = () => {
   const dispatch = useDispatch();

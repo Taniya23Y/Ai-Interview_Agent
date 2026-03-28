@@ -205,17 +205,6 @@ const Step2Interview = ({ interviewData, onFinish }) => {
     recognitionRef.current = recognition;
   }, []);
 
-  // const startMic = () => {
-  //   if (recognitionRef.current && !isAiPlaying && !isListening) {
-  //     try {
-  //       recognitionRef.current.start();
-  //       setIsListening(true);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // };
-
   const startMic = () => {
     const recognition = recognitionRef.current;
 
@@ -336,9 +325,12 @@ const Step2Interview = ({ interviewData, onFinish }) => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-100 flex items-center justify-center p-4 sm:p-6">
+    <div className="h-screen relative overflow-hidden bg-linear-to-br from-amber-50 via-white to-amber-100 flex items-center justify-center p-4 sm:p-6">
+      <div className="absolute w-[500px] h-[500px] bg-amber-500/20 blur-[140px] -top-20 -left-20 rounded-full" />
+      <div className="absolute w-[400px] h-[400px] bg-emerald-500/10 blur-[120px] -bottom-20 -right-20 rounded-full" />
+
       <div className="w-full max-w-7xl min-h-[80vh] bg-white rounded-3xl overflow-hidden shadow-xl flex flex-col lg:flex-row">
-        <div className="w-full lg:w-[35%] bg-white flex flex-col items-center p-6 space-y-6 border-r border-gray-200">
+        <div className="w-full lg:w-[35%] bg-white flex flex-col items-center p-6 space-y-6 border-r border-amber-200">
           <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl">
             <video
               src={videoSource}
@@ -354,7 +346,7 @@ const Step2Interview = ({ interviewData, onFinish }) => {
 
           {/* subtitle  */}
           {subtitle && (
-            <div className="w-full max-w-md bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-sm">
+            <div className="w-full max-w-md bg-amber-50 border border-amber-200 rounded-xl p-4 shadow-sm">
               <p className="text-gray-700 text-sm sm:text-base font-medium text-center leading-relaxed">
                 {subtitle}
               </p>
@@ -362,17 +354,17 @@ const Step2Interview = ({ interviewData, onFinish }) => {
           )}
 
           {/* Timer Card */}
-          <div className="w-full max-w-md bg-white border border-gray-200 rounded-2xl shadow-md p-6 space-y-5">
+          <div className="w-full max-w-md bg-white border border-amber-200 rounded-2xl shadow-md p-6 space-y-5">
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-500">Interview Status</span>
               {isAiPlaying && (
-                <span className="text-sm font-medium text-emerald-600">
+                <span className="text-sm font-medium text-amber-600">
                   {isAiPlaying ? "AI Speaking" : ""}
                 </span>
               )}
             </div>
 
-            <div className="h-px bg-gray-200"></div>
+            <div className="h-px bg-amber-200"></div>
 
             <div className="flex justify-center">
               <Timer
@@ -381,18 +373,18 @@ const Step2Interview = ({ interviewData, onFinish }) => {
               />
             </div>
 
-            <div className="h-px bg-gray-200"></div>
+            <div className="h-px bg-amber-200"></div>
 
             <div className="grid grid-cols-2 gap-6 text-center">
               <div>
-                <span className="text-2xl font-bold text-emerald-600">
+                <span className="text-2xl font-bold text-amber-600">
                   {currentIndex + 1}
                 </span>
                 <span className="text-sm text-gray-400">Current Question</span>
               </div>
 
               <div>
-                <span className="text-2xl font-bold text-emerald-600">
+                <span className="text-2xl font-bold text-amber-600">
                   {questions.length}
                 </span>
                 <span className="text-sm text-gray-400">Total Questions</span>
@@ -403,13 +395,13 @@ const Step2Interview = ({ interviewData, onFinish }) => {
 
         {/* RIGHT SIDE (QUESTION + ANSWER) */}
         <div className="flex-1 flex flex-col p-6 sm:p-8">
-          <h2 className="text-2xl font-bold text-emerald-600 mb-6">
+          <h2 className="text-2xl font-bold text-amber-600 mb-6">
             AI Smart Interview
           </h2>
 
           {/* Question Card */}
           {!isIntroPhase && (
-            <div className="relative mb-6 bg-gray-50 sm:p-6 rounded-2xl border border-gray-200 shadow-sm">
+            <div className="relative mb-6 bg-amber-50 sm:p-6 rounded-2xl border border-amber-200 shadow-sm">
               <p className="text-xs sm:text-sm text-gray-400 mb-2">
                 Question {currentIndex + 1} of {questions.length}
               </p>
@@ -424,7 +416,7 @@ const Step2Interview = ({ interviewData, onFinish }) => {
             placeholder="Type your answer here..."
             onChange={(e) => setAnswer(e.target.value)}
             value={answer}
-            className="flex-1 min-h-40 bg-white p-4 rounded-xl resize-none outline-none border border-gray-200 focus:ring-2 focus:ring-emerald-500 transition text-gray-800"
+            className="flex-1 min-h-40 bg-white p-4 rounded-xl resize-none outline-none border border-amber-200 focus:ring-2 focus:ring-amber-500 transition text-gray-800"
           />
 
           {/* Buttons */}
@@ -446,7 +438,7 @@ const Step2Interview = ({ interviewData, onFinish }) => {
                 onClick={submitAnswer}
                 disabled={isSubmitting}
                 whileTap={{ scale: 0.95 }}
-                className="flex-1 cursor-pointer bg-linear-to-r from-emerald-600 to-teal-500 text-white py-3 rounded-xl shadow-lg hover:opacity-90 transition font-semibold disabled:bg-gray-500"
+                className="flex-1 cursor-pointer bg-linear-to-r from-amber-500 to-yellow-400 text-black py-3 rounded-xl shadow-lg hover:opacity-90 transition font-semibold disabled:bg-gray-400"
               >
                 {isSubmitting ? "Submitting..." : "Submit Answer"}
               </motion.button>
@@ -455,13 +447,13 @@ const Step2Interview = ({ interviewData, onFinish }) => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="mt-6 bg-emerald-50 border border-emerald-200 rounded-2xl shadow-sm"
+              className="mt-6 bg-emerald-50 border border-amber-200 rounded-2xl shadow-sm"
             >
               <p className="text-emerald-700 font-medium mb-4">{feedback}</p>
 
               <button
                 onClick={handleNext}
-                className="w-full bg-linear-to-r from-emerald-600 to-teal-500 text-white py-3 rounded-xl shadow-md hover:opacity-90 transition flex items-center justify-center gap-1"
+                className="w-full bg-linear-to-r from-emerald-500 to-yellow-400 text-black py-3 rounded-xl shadow-md hover:opacity-90 transition flex items-center justify-center gap-1"
               >
                 Next Question <BsArrowRight size={18} />
               </button>
@@ -469,6 +461,9 @@ const Step2Interview = ({ interviewData, onFinish }) => {
           )}
         </div>
       </div>
+
+      <div className="absolute w-[500px] h-[500px] bg-amber-500/20 blur-[140px] -bottom-20 -right-20 rounded-full" />
+      <div className="absolute w-[400px] h-[400px] bg-emerald-500/10 blur-[120px] -bottom-12 -right-12 rounded-full" />
     </div>
   );
 };

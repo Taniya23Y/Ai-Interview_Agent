@@ -3,12 +3,22 @@ import Payment from "../models/payment.model.js";
 import User from "../models/user.model.js";
 import crypto from "crypto";
 
+const PLANS = {
+  basic: { amount: 100, credits: 150 },
+  pro: { amount: 500, credits: 650 },
+};
+
 export const createOrder = async (req, res) => {
   try {
-    const { planId, amount, credits } = req.body;
-    if (!amount || !credits) {
-      return res.status(400).json({ message: "Invalid plan data." });
+    const { planId } = req.body;
+
+    const plan = PLANS[planId];
+
+    if (!plan) {
+      return res.status(400).json({ message: "Invalid plan selected" });
     }
+
+    const { amount, credits } = plan;
 
     const options = {
       amount: amount * 100,
@@ -24,15 +34,15 @@ export const createOrder = async (req, res) => {
       amount,
       credits,
       razorpayOrderId: order.id,
-      // razorpayPaymentId,
       status: "created",
     });
 
     res.json(order);
   } catch (error) {
+    console.error(error);
     return res
       .status(500)
-      .json({ message: `failed to create Razorpay order ${error}` });
+      .json({ message: `Failed to create order: ${error.message}` });
   }
 };
 
@@ -64,17 +74,15 @@ export const verifyPayment = async (req, res) => {
       return res.json({ message: "Already processed!" });
     }
 
-    // update payment record
+    // ✅ mark paid
     payment.status = "paid";
     payment.razorpayPaymentId = razorpay_payment_id;
     await payment.save();
 
-    // Add credits to user
+    // ✅ add credits
     const updatedUser = await User.findByIdAndUpdate(
       payment.userId,
-      {
-        $inc: { credits: payment.credits },
-      },
+      { $inc: { credits: payment.credits } },
       { new: true },
     );
 
@@ -84,8 +92,9 @@ export const verifyPayment = async (req, res) => {
       user: updatedUser,
     });
   } catch (error) {
+    console.error(error);
     return res
       .status(500)
-      .json({ message: `failed to verify Razorpay Payment ${error}` });
+      .json({ message: `Failed to verify payment: ${error.message}` });
   }
 };

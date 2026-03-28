@@ -76,7 +76,7 @@ const Step3Report = ({ report }) => {
     // ============== TITLE ==============
     doc.setFont("helvetica", "bold");
     doc.setFontSize(20);
-    doc.setTextColor(34, 197, 94);
+    doc.setTextColor(245, 158, 11);
     doc.text("AI Interview performance Report", pageWidth / 2, currentY, {
       align: "center",
     });
@@ -84,17 +84,17 @@ const Step3Report = ({ report }) => {
     currentY += 5;
 
     // underline
-    doc.setDrawColor(34, 197, 94);
+    doc.setDrawColor(245, 158, 11);
     doc.line(margin, currentY + 2, pageWidth - margin, currentY + 2);
 
     currentY += 15;
 
     // ======================= Final SCORE BOX ================================
-    doc.setFillColor(240, 253, 244);
+    doc.setFillColor(255, 251, 235);
     doc.roundedRect(margin, currentY, contentWidth, 20, 4, 4, "F");
 
     doc.setFontSize(14);
-    doc.setTextColor(0, 0, 0);
+    doc.setTextColor(120, 53, 15);
     doc.text(`Final Score: ${finalScore}/10`, pageWidth / 2, currentY + 12, {
       align: "center",
     });
@@ -102,10 +102,11 @@ const Step3Report = ({ report }) => {
     currentY += 30;
 
     //=================== SKILLS BOX =================
-    doc.setFillColor(249, 250, 251);
+    doc.setFillColor(255, 247, 237);
     doc.roundedRect(margin, currentY, contentWidth, 30, 4, 4, "F");
 
     doc.setFontSize(12);
+    doc.setTextColor(0, 0, 0);
 
     doc.text(`Confident: ${confidence}`, margin + 10, currentY + 10);
     doc.text(`Communication: ${communication}`, margin + 10, currentY + 18);
@@ -128,14 +129,16 @@ const Step3Report = ({ report }) => {
     }
 
     doc.setFillColor(255, 255, 255);
-    doc.setDrawColor(220);
+    doc.setDrawColor(253, 186, 116);
     doc.roundedRect(margin, currentY, contentWidth, 35, 4, 4);
 
     doc.setFont("helvetica", "bold");
+    doc.setTextColor(245, 158, 11);
     doc.text("Professional Advice", margin + 10, currentY + 10);
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(11);
+    doc.setTextColor(60, 60, 60);
 
     const splitAdvice = doc.splitTextToSize(advice, contentWidth - 20);
     doc.text(splitAdvice, margin + 10, currentY + 20);
@@ -159,8 +162,8 @@ const Step3Report = ({ report }) => {
         valign: "top",
       },
       headStyles: {
-        fillColor: [34, 197, 94],
-        textColor: 255,
+        fillColor: [245, 158, 11],
+        textColor: 0,
         halign: "center",
       },
       columnStyles: {
@@ -170,7 +173,7 @@ const Step3Report = ({ report }) => {
         3: { cellWidth: "auto" },
       },
       alternateRowStyles: {
-        fillColor: [249, 250, 251],
+        fillColor: [255, 247, 237],
       },
     });
 
@@ -178,27 +181,27 @@ const Step3Report = ({ report }) => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br form-gray-50 to-green-50 px-3 sm:px-6 lg:px-10 py-8">
+    <div className="min-h-screen bg-linear-to-br form-amber-50 via-white to-amber-100 px-3 sm:px-6 lg:px-10 py-8">
       <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="md:mb-10 w-full flex items-start gap-4 flex-wrap">
           <button
             onClick={() => navigate("/history")}
-            className="mt-1 cursor-pointer p-3 rounded-full bg-white shadow hover:shadow-md transition"
+            className="mt-1 cursor-pointer p-3 rounded-full bg-black shadow hover:shadow-md transition border border-amber-200"
           >
             <FaArrowLeft />
           </button>
 
           <div>
-            <h1 className="text-3xl flex-nowrap  font-bold text-gray-800 ">
+            <h1 className="text-3xl flex-nowrap font-bold text-amber-600 ">
               Interview Analytics Dashboard
             </h1>
-            <p className="">AI-Powered performance insights </p>
+            <p className="text-white">AI-Powered performance insights </p>
           </div>
         </div>
 
         <button
           onClick={downloadPdf}
-          className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl shadow-md transition-all duration-300 font-semibold text-sm sm:text-base text-nowrap cursor-pointer"
+          className="bg-linear-to-r from-amber-500 to-yellow-400 hover:opacity-90 text-black px-6 py-3 rounded-xl shadow-md transition-all duration-300 font-semibold text-sm sm:text-base text-nowrap cursor-pointer"
         >
           Download PDF
         </button>
@@ -220,9 +223,9 @@ const Step3Report = ({ report }) => {
                 text={`${score}/10`}
                 styles={buildStyles({
                   textSize: "18px",
-                  pathColor: "#10b98",
-                  textColor: "#ef4444",
-                  trailColor: "#e5e7eb",
+                  pathColor: "#f59e0b", // amber-500
+                  textColor: "#d97706", // amber-600
+                  trailColor: "#fde68a", // amber-200
                 })}
               />
             </div>
@@ -241,7 +244,7 @@ const Step3Report = ({ report }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-6 sm:p-8"
+            className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-6 sm:p-8 border border-amber-200"
           >
             <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-6">
               Skill Evaluation
@@ -249,16 +252,16 @@ const Step3Report = ({ report }) => {
             <div className="space-y-5">
               {skills.map((s, i) => (
                 <div key={i}>
-                  <div className="flex justify-between mb-2 text-sm">
+                  <div className="flex text-black justify-between mb-2 text-sm">
                     <span>{s.label}</span>
-                    <span className="font-semibold text-green-600">
+                    <span className="font-semibold text-amber-600">
                       {s.value}
                     </span>
                   </div>
 
-                  <div className="bg-gray-200 h-2 sm:h-3 rounded-full">
+                  <div className="bg-amber-200 h-2 sm:h-3 rounded-full">
                     <div
-                      className="bg-green-500 h-full rounded-full"
+                      className="bg-amber-500 h-full rounded-full"
                       style={{ width: `${s.value * 10}%` }}
                     ></div>
                   </div>
@@ -272,7 +275,7 @@ const Step3Report = ({ report }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-5 sm:p-8"
+            className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-5 sm:p-8 border border-amber-200"
           >
             <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-4 sm:mb-6">
               Performance Trend
@@ -288,9 +291,9 @@ const Step3Report = ({ report }) => {
                   <Area
                     type="monotone"
                     dataKey="score"
-                    stroke="#22c55e"
-                    fill="#bbf7d0"
-                    strokewidth={3}
+                    stroke="#f59e0b"
+                    fill="#fde68a"
+                    strokeWidth={3}
                   />
                 </AreaChart>
               </ResponsiveContainer>
@@ -300,7 +303,7 @@ const Step3Report = ({ report }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-5 sm:p-8"
+            className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-5 sm:p-8 border border-amber-200"
           >
             <h3 className="txt-base sm:text-lg font-semibold text-gray-700 mb-6">
               Question Breakdown
@@ -309,7 +312,7 @@ const Step3Report = ({ report }) => {
               {questionWiseScore.map((q, i) => (
                 <div
                   key={i}
-                  className="bg-gray-50 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-gray-200"
+                  className="bg-amber-50 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-amber-200"
                 >
                   <div className="flex flex-col sm:flex-row  sm:justify-between sm:items-start gap-3 mb-4">
                     <div>
@@ -320,12 +323,12 @@ const Step3Report = ({ report }) => {
                       </p>
                     </div>
 
-                    <div className="bg-green-100 text-green-600 px-3 py-1 rounded-full  font-bold text-xs sm:text-sm w-fit">
+                    <div className="bg-amber-100 text-green-600 px-3 py-1 rounded-full font-bold text-xs sm:text-sm w-fit">
                       {q.score ?? 0}/10
                     </div>
 
-                    <div className="bg-green-50 border border-green-2090 p-4 rounded-lg">
-                      <p className="text-xs text-green-600 font-semibold mb-1">
+                    <div className="mt-4 bg-white border border-amber-200 p-4 rounded-lg">
+                      <p className="text-xs text-amber-600 font-semibold mb-1">
                         AI Feedback
                       </p>
                       <p className="text-sm text-gray-700 leading-relaxed">

@@ -41,8 +41,6 @@ const Step1SetUp = ({ onStart }) => {
         { withCredentials: true },
       );
 
-      // console.log(result.data);
-
       setRole(result.data.role || "");
       setExperience(result.data.experience || "");
       setProjects(result.data.projects || []);
@@ -66,8 +64,6 @@ const Step1SetUp = ({ onStart }) => {
         { withCredentials: true },
       );
 
-      // console.log(result.data);
-
       if (userData) {
         dispatch(
           setUserData({ ...userData, credits: result.data.creditsLeft }),
@@ -86,101 +82,102 @@ const Step1SetUp = ({ onStart }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-100 to-gray-200 px-4"
+      className="min-h-screen bg-[#0b0f14] text-white flex items-center justify-center px-4 relative overflow-hidden"
     >
-      <div className="w-full max-w-6xl bg-white rounded-3xl shadow-2xl grid md:grid-cols-2 overflow-hidden">
+      <div className="absolute w-[500px] h-[500px] bg-amber-500/20 blur-[140px] -top-20 -left-20 rounded-full" />
+      <div className="absolute w-[400px] h-[400px] bg-emerald-500/10 blur-[120px] -bottom-20 -right-20 rounded-full" />
+
+      <div className="relative w-full max-w-6xl grid md:grid-cols-2 rounded-3xl overflow-hidden">
         <motion.div
           initial={{ x: -80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.7 }}
-          className="relative bg-linear-to-br from-green-500 to-green-100 p-12 flex flex-col justify-center"
+          className="bg-white/5 backdrop-blur-2xl border border-white/10 p-12 flex flex-col justify-center"
         >
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">
-            Start Your AI Interview
+          <h2 className="text-4xl font-semibold mb-6">
+            Start Your <span className="text-amber-400">AI Interview</span>
           </h2>
-          <p className="text-gray-600 mb-10">
-            Practice real Interview scenarios powered by AI, Improve
-            communication, technical skills, and confidence.
+
+          <p className="text-gray-400 mb-10">
+            Practice real interview scenarios powered by AI and improve faster.
           </p>
 
           <div className="space-y-5">
             {[
               {
-                icon: <FaUserTie className="text-green-600 text-xl" />,
+                icon: <FaUserTie />,
                 text: "Choose Role & Experience",
               },
               {
-                icon: <FaMicrophoneAlt className="text-green-600 text-xl" />,
-                text: "Smart Voice Interview",
+                icon: <FaMicrophoneAlt />,
+                text: "Voice Interview Simulation",
               },
               {
-                icon: <FaChartLine className="text-green-600 text-xl" />,
-                text: "Performance Analytics",
+                icon: <FaChartLine />,
+                text: "AI Performance Feedback",
               },
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 + index * 0.15 }}
                 whileHover={{ scale: 1.03 }}
-                className="flex items-center space-x-4 bg-white p-4 rounded-xl shadow-sm cursor-pointer"
+                className="flex items-center gap-4 bg-white/5 border border-white/10 p-4 rounded-xl"
               >
-                {item.icon}
-                <span>{item.text}</span>
+                <div className="text-amber-400">{item.icon}</div>
+                <span className="text-gray-300 text-sm">{item.text}</span>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
+        {/* RIGHT SIDE */}
         <motion.div
           initial={{ x: 80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.7 }}
-          className="p-12 bg-white"
+          className="bg-white/5 backdrop-blur-2xl border border-white/10 p-12"
         >
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">
-            Interview SetUp
-          </h2>
+          <h2 className="text-3xl font-bold mb-8">Interview Setup</h2>
 
           <div className="space-y-6">
             <div className="relative">
-              <FaUserTie className="absolute top-4 left-4 text-gray-400" />{" "}
+              <FaUserTie className="absolute top-4 left-4 text-amber-400" />
               <input
                 type="text"
                 placeholder="Experience (e.g. 2 years)"
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 outline-none transition"
+                className="w-full pl-12 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm placeholder:text-gray-500 focus:border-amber-400 outline-none"
                 onChange={(e) => setExperience(e.target.value)}
                 value={experience}
               />
             </div>
 
             <div className="relative">
-              <FaUserTie className="absolute top-4 left-4 text-gray-400" />{" "}
+              <FaUserTie className="absolute top-4 left-4 text-amber-400" />
               <input
                 type="text"
                 placeholder="Enter role"
-                className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 outline-none transition"
+                className="w-full pl-12 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm placeholder:text-gray-500 focus:border-amber-400 outline-none"
                 onChange={(e) => setRole(e.target.value)}
                 value={role}
               />
             </div>
+
+            {/* MODE */}
             <select
               value={mode}
               onChange={(e) => setMode(e.target.value)}
-              className="w-full py-3 px-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 outline-none transition"
+              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-gray-300 focus:border-amber-400 outline-none"
             >
               <option value="Technical">Technical Interview</option>
-              <option value="HR">Hr Interview</option>
+              <option value="HR">HR Interview</option>
             </select>
 
             {!analysisDone && (
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 onClick={() => document.getElementById("resumeUpload").click()}
-                className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-green-500 hover:bg-green-50 transition"
+                className="border border-dashed border-white/20 rounded-xl p-8 text-center cursor-pointer hover:border-amber-400 transition"
               >
-                <FaFileUpload className="text-4xl mx-auto text-green-600 mb-3" />
+                <FaFileUpload className="text-3xl mx-auto text-amber-400 mb-3" />
+
                 <input
                   type="file"
                   accept="application/pdf"
@@ -188,10 +185,9 @@ const Step1SetUp = ({ onStart }) => {
                   className="hidden"
                   onChange={(e) => setResumeFile(e.target.files[0])}
                 />
-                <p className="text-gray-600 font-medium">
-                  {resumeFile
-                    ? resumeFile.name
-                    : "click to upload resume (Optional)"}
+
+                <p className="text-gray-400 text-sm">
+                  {resumeFile ? resumeFile.name : "Upload Resume (Optional)"}
                 </p>
 
                 {resumeFile && (
@@ -201,7 +197,7 @@ const Step1SetUp = ({ onStart }) => {
                       handleUploadResume();
                     }}
                     whileHover={{ scale: 1.02 }}
-                    className="mt-4 cursor-pointer bg-gray-900 text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition"
+                    className="mt-4 bg-amber-500 text-black px-5 py-2 rounded-lg text-sm font-medium"
                   >
                     {analyzing ? "Analyzing..." : "Analyze Resume"}
                   </motion.button>
@@ -209,40 +205,38 @@ const Step1SetUp = ({ onStart }) => {
               </motion.div>
             )}
 
+            {/* RESULT */}
             {analysisDone && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-gray-50 border border-gray-200 rounded-xl p-5 space-y-4"
+                className="bg-white/5 border border-white/10 rounded-xl p-5 space-y-4"
               >
-                <h3 className="text-lg font-semibold text-gray-800">
-                  Resume Analysis Result
+                <h3 className="text-sm text-amber-400 font-medium">
+                  Resume Insights
                 </h3>
 
                 {projects.length > 0 && (
                   <div>
-                    <p className="font-medium text-gray-700 mb-1">Projects:</p>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1">
+                    <p className="text-gray-400 text-xs mb-1">Projects</p>
+                    <ul className="text-gray-300 text-sm space-y-1">
                       {projects.map((p, i) => (
-                        <li key={i}>{p}</li>
+                        <li key={i}>• {p}</li>
                       ))}
                     </ul>
                   </div>
                 )}
 
                 {skills.length > 0 && (
-                  <div>
-                    <p className="font-medium text-gray-700 mb-1">Skills:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {skills.map((s, i) => (
-                        <span
-                          key={i}
-                          className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm "
-                        >
-                          {s}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((s, i) => (
+                      <span
+                        key={i}
+                        className="bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-xs border border-emerald-400/20"
+                      >
+                        {s}
+                      </span>
+                    ))}
                   </div>
                 )}
               </motion.div>
@@ -253,7 +247,7 @@ const Step1SetUp = ({ onStart }) => {
               disabled={!role || !experience || loading}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full text-center cursor-pointer disabled:bg-gray-600 bg-green-600 hover:bg-green-700 text-white py-3 rounded-full text-lg font-semibold transition duration-300 shadow-md"
+              className="w-full cursor-pointer bg-amber-500 text-black py-3 rounded-xl font-semibold disabled:bg-gray-600 transition"
             >
               {loading ? "Starting..." : "Start Interview"}
             </motion.button>
